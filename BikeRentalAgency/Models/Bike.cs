@@ -19,7 +19,5 @@ namespace BikeRentalAgency.Models
         public string FrameSize { get; set; }
         [Required]
         public decimal UnitPrice { get; set; }
-        [Required]
-        public string PaymentType { get; set; }
     }
 }

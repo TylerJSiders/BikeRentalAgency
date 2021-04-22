@@ -10,7 +10,7 @@ namespace BikeRentalAgency.Models
     {
         public int ID { get; set; }
         [Required]
-        public int BikeID { get; set; }
+        public List<Bike> Bikes { get; set; } = new List<Bike>();
         [Required]
         public int CustomerID { get; set; }
         [Required]

@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BikeRentalAgency.Models;
+using Microsoft.EntityFrameworkCore;
+using BikeRentalAgency.Models.Interfaces;
+using BikeRentalAgency.Models.Repositories;
 
 namespace BikeRentalAgency
 {
@@ -28,10 +32,12 @@ namespace BikeRentalAgency
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddDbContext<AgencyDBContext>(opts =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BikeRentalAgency", Version = "v1" });
+                opts.UseSqlServer(
+                    Configuration["ConnectionStrings:BikeAgencyConnection"]);
             });
+            services.AddScoped<IDBRepository, DBRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +46,6 @@ namespace BikeRentalAgency
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BikeRentalAgency v1"));
             }
 
             app.UseHttpsRedirection();
