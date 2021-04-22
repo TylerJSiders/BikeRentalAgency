@@ -40,7 +40,19 @@ namespace BikeRentalAgency.Controllers
 
             if (customer == null)
             {
-                return NotFound();
+                return NoContent();
+            }
+
+            return customer;
+        }
+
+        [HttpGet("GetCustomersByLastName/{LastName}")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomersByLastName(string LastName)
+        {
+            var customer = await Repository.GetCustomersByLastName(LastName);
+            if (customer == null)
+            {
+                return NoContent();
             }
 
             return customer;
@@ -48,65 +60,47 @@ namespace BikeRentalAgency.Controllers
 
         //// PUT: api/Customers/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCustomer(int id, Customer customer)
-        //{
-        //    if (id != customer.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Customer>> PutCustomer(int id, Customer customer)
+        {
+            if (id != customer.ID)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(customer).State = EntityState.Modified;
+            if (!Repository.CustomerExists(id))
+                return NoContent();
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CustomerExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            var customerchanges = await Repository.UpdateCustomer(customer);
 
-        //    return NoContent();
-        //}
+            return customerchanges;
+            
+        }
 
         //// POST: api/Customers
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
-        //{
-        //    _context.Customers.Add(customer);
-        //    await _context.SaveChangesAsync();
+        [HttpPost]
+        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        {
+            if (Repository.CustomerExistsByEmail(customer.Email))
+                return BadRequest($"User with email {customer.Email} already exists.");
+            var customerAdded = await Repository.AddCustomer(customer);
 
-        //    return CreatedAtAction("GetCustomer", new { id = customer.ID }, customer);
-        //}
+            return CreatedAtAction("GetCustomerByID", customerAdded, customer);
+        }
 
         //// DELETE: api/Customers/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteCustomer(int id)
-        //{
-        //    var customer = await _context.Customers.FindAsync(id);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
+        {
+            var customer = await Repository.GetCustomerByID(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.Customers.Remove(customer);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool CustomerExists(int id)
-        //{
-        //    return _context.Customers.Any(e => e.ID == id);
-        //}
+            var customerDeleted = await Repository.DeleteCustomer(customer.ID);
+            return customerDeleted;
+        }
     }
 }
