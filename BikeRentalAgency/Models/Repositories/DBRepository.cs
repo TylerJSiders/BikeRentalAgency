@@ -79,6 +79,9 @@ namespace BikeRentalAgency.Models.Repositories
             await context.SaveChangesAsync();
             return customer;
         }
+
+
+
         //Employee Methods
         public async Task<Employee> AddEmployee(Employee employee)
         {
@@ -131,6 +134,9 @@ namespace BikeRentalAgency.Models.Repositories
             await context.SaveChangesAsync();
             return employee;
         }
+
+
+
         //Special Feature Methods
         public async Task<SpecialFeature> CreateSpecialFeature(SpecialFeature feature)
         {
@@ -169,6 +175,10 @@ namespace BikeRentalAgency.Models.Repositories
             return await context.SpecialFeatures.FindAsync(id);
         }
 
+
+
+        //Rental Shops
+
         public async Task<RentalShop> AddRentalShop(RentalShop rentalShop)
         {
             context.Shops.Add(rentalShop);
@@ -204,5 +214,121 @@ namespace BikeRentalAgency.Models.Repositories
             context.SaveChanges();
             return await context.Shops.FindAsync(ShopChanges.ID);
         }
+
+
+        //Reservations
+
+        public async Task<Reservation> AddReservation(Reservation reservation)
+        {
+            context.Reservations.Add(reservation);
+            await context.SaveChangesAsync();
+            var Reservation = await context.Reservations.OrderByDescending(s => s.ID).FirstOrDefaultAsync();
+            return Reservation;
+        }
+        public async Task<List<Reservation>> GetReservations()
+        {
+            return await context.Reservations.ToListAsync();
+        }
+        public async Task<Reservation> GetReservationById(int id)
+        {
+            return await context.Reservations.FindAsync(id);
+        }
+        public bool ReservationExists(int id)
+        {
+            return context.Reservations.Any(s => s.ID == id);
+        }
+
+        public async Task<Reservation> DeleteReservation(int id)
+        {
+            var ReservationDelete = await GetReservationById(id);
+            context.Reservations.Remove(ReservationDelete);
+            await context.SaveChangesAsync();
+            return ReservationDelete;
+        }
+
+        public async Task<Reservation> UpdateReservation(Reservation reservationChanges)
+        {
+            var Reservation = context.Reservations.Attach(reservationChanges);
+            Reservation.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return await context.Reservations.FindAsync(reservationChanges.ID);
+        }
+
+        //Reservation Details
+
+        public async Task<ReservationDetails> AddReservationDetails(ReservationDetails reservationDetails)
+        {
+            context.ReservationDetails.Add(reservationDetails);
+            await context.SaveChangesAsync();
+            var ReservationDetails = await context.ReservationDetails.OrderByDescending(s => s.ReservationID).FirstOrDefaultAsync();
+            return ReservationDetails;
+        }
+        public async Task<List<ReservationDetails>> GetReservationDetails()
+        {
+            return await context.ReservationDetails.ToListAsync();
+        }
+        public async Task<ReservationDetails> GetReservationDetailsById(int id)
+        {
+            return await context.ReservationDetails.FindAsync(id);
+        }
+
+        public async Task<ReservationDetails> DeleteReservationDetails(int id)
+        {
+            var ReservationDetailsDelete = await GetReservationDetailsById(id);
+            context.ReservationDetails.Remove(ReservationDetailsDelete);
+            await context.SaveChangesAsync();
+            return ReservationDetailsDelete;
+        }
+
+        public async Task<ReservationDetails> UpdateReservationDetails(ReservationDetails reservationDetailsChanges)
+        {
+            var ReservationDetails = context.ReservationDetails.Attach(reservationDetailsChanges);
+            ReservationDetails.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return await context.ReservationDetails.FindAsync(reservationDetailsChanges.ReservationID);
+        }
+
+
+        //Bike Methods
+        public async Task<Bike> AddBike(Bike bike)
+        {
+            context.Bikes.Add(bike);
+            await context.SaveChangesAsync();
+            var Bike = await context.Bikes.OrderByDescending(s => s.ID).FirstOrDefaultAsync();
+            return Bike;
+        }
+
+        public async Task<List<Bike>> GetBikes()
+        {
+            return await context.Bikes.ToListAsync();
+        }
+
+        public async Task<Bike> GetBikeByID(int id)
+        {
+            return await context.Bikes.FindAsync(id);
+        }
+
+        public async Task<Bike> DeleteBike(int id)
+        {
+            var BikeDelete = await GetBikeByID(id);
+            context.Bikes.Remove(BikeDelete);
+            await context.SaveChangesAsync();
+            return BikeDelete;
+        }
+
+        public async Task<Bike> UpdateBike(Bike bikeChanges)
+        {
+            var Bikes = context.Bikes.Attach(bikeChanges);
+            Bikes.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return await context.Bikes.FindAsync(bikeChanges.ID);
+        }
+
+        public bool BikeExists(int id)
+        {
+            return context.Bikes.Any(s => s.ID == id);
+        }
+
+
     }
 }

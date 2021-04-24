@@ -35,5 +35,26 @@ namespace BikeRentalAgency.Models.Interfaces
         public bool RentalShopExists(int id);
         public Task<RentalShop> DeleteRentalShop(int id);
         public Task<RentalShop> UpdateRentalShop(RentalShop ShopChanges);
+        //Reservation Methods
+        public Task<Reservation> AddReservation(Reservation reservation);
+        public Task<List<Reservation>> GetReservations();
+        public Task<Reservation> GetReservationById(int id);
+        public bool ReservationExists(int id);
+        public Task<Reservation> DeleteReservation(int id);
+        public Task<Reservation> UpdateReservation(Reservation reservation);
+        //Reservation Details Methods
+        public Task<ReservationDetails> AddReservationDetails(ReservationDetails reservationDetails);
+        public Task<List<ReservationDetails>> GetReservationDetails();
+        public Task<ReservationDetails> GetReservationDetailsById(int id);
+        public Task<ReservationDetails> DeleteReservationDetails(int id);
+        public Task<ReservationDetails> UpdateReservationDetails(ReservationDetails reservationDetails);
+        //Bike Methods
+        public Task<Bike> AddBike(Bike bike);
+        public Task<List<Bike>> GetBikes();
+        public Task<Bike> GetBikeByID(int id);
+        public Task<Bike> DeleteBike(int id);
+        public Task<Bike> UpdateBike(Bike bike);
+        public bool BikeExists(int id);
+
     }
 }
