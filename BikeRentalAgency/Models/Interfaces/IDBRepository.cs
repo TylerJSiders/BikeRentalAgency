@@ -7,6 +7,7 @@ namespace BikeRentalAgency.Models.Interfaces
 {
     public interface IDBRepository
     {
+        //Customer Methods
         public Task<List<Customer>> GetCustomers();
         public Task<Customer> GetCustomerByID(int id);
         public Task<List<Customer>> GetCustomersByLastName(string name);
@@ -15,6 +16,7 @@ namespace BikeRentalAgency.Models.Interfaces
         public Task<Customer> AddCustomer(Customer customer);
         public bool CustomerExistsByEmail(string email);
         public Task<Customer> DeleteCustomer(int id);
+        //Employee Methods
         public Task<Employee> AddEmployee(Employee employee);
         public Task<List<Employee>> GetEmployees();
         public Task<Employee> GetEmployeeByID(int id);
@@ -22,6 +24,7 @@ namespace BikeRentalAgency.Models.Interfaces
         public bool EmployeeExistsByEmail(string email);
         public bool EmployeeExistsByID(int id);
         public Task<Employee> DeleteEmployee(int id);
+        //Special Features Methods
         public Task<SpecialFeature> CreateSpecialFeature(SpecialFeature feature);
         public bool SpecialFeatureExists(int id);
         public Task<SpecialFeature> DeleteSpecialFeature(int id);
