@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace BikeRentalAgency.Models
+
+
+namespace BikeRentalLibrary
 {
     public class Bike
     {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BikeRentalAgency.Models;
 using BikeRentalAgency.Models.Interfaces;
 using BikeRentalAgency.Models.Repositories;
+using BikeRentalLibrary;
 
 namespace BikeRentalAgency.Controllers
 {

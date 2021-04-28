@@ -6,6 +6,7 @@ using BikeRentalAgency.Models.Interfaces;
 using BikeRentalAgency.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using BikeRentalLibrary;
 
 namespace BikeRentalAgency.Models.Repositories
 {
