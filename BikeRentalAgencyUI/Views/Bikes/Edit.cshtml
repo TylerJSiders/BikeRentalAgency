@@ -1,0 +1,58 @@
+﻿@model BikeRentalLibrary.Bike
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Bike</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden="hidden" contenteditable="false">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BikeName" class="control-label">Bike Name</label>
+                <input asp-for="BikeName" class="form-control" />
+                <span asp-validation-for="BikeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentLocationID" class="control-label">Where is this bike located?</label>
+                <input asp-for="CurrentLocationID" class="form-control" />
+                <span asp-validation-for="CurrentLocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="isReserved" class="control-label">Is this bike currently available?</label>
+                <input asp-for="isReserved" class="form-control" />
+                <span asp-validation-for="isReserved" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FrameSize" class="control-label">Frame Size</label>
+                <input asp-for="FrameSize" class="form-control" />
+                <span asp-validation-for="FrameSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPrice" class="control-label">Rental Fee</label>
+                <input asp-for="UnitPrice" class="form-control" />
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

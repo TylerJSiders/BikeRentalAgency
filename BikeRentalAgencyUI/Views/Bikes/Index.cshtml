@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BikeRentalLibrary.Bike>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                Bike Name
+            </th>
+            <th>
+                Current Location
+            </th>
+            <th>
+                Is it reserved?
+            </th>
+            <th>
+                Frame Size
+            </th>
+            <th>
+                Rental Fee
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BikeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentLocationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isReserved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrameSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                <a asp-controller="Bike" asp-action="Edit" asp-route-BikeID="@item.ID">Edit </a>|
+                <a asp-controller="Bike" asp-action="Details" asp-route-BikeID="@item.ID">Details </a>|
+                <a asp-controller="Bike" asp-action="Delete" asp-route-BikeID="@item.ID">Delete </a>|
+                @*@Html.ActionLink("Edit", "Edit", item.ID) |*@
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

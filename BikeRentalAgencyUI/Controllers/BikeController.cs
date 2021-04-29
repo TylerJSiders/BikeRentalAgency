@@ -42,9 +42,9 @@ namespace BikeRentalAgencyUI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int BikeID)
         {
-            Bike bike = await Repository.GetBikeById(id);
+            Bike bike = await Repository.GetBikeById(BikeID);
             return View(bike);
         }
 
@@ -55,15 +55,15 @@ namespace BikeRentalAgencyUI.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(int BikeID)
         {
-            Bike bike = await Repository.GetBikeById(id);
+            Bike bike = await Repository.GetBikeById(BikeID);
             return View(bike);
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int BikeID)
         {
-            bool success = await Repository.DeleteEmployee(id);
+            bool success = await Repository.DeleteEmployee(BikeID);
             return RedirectToAction("Index")
         }
     }
