@@ -28,14 +28,14 @@ namespace BikeRentalAgency.Controllers
         public async Task<ActionResult<IEnumerable<RentalShop>>> GetShops()
         {
             var rentalShops = await Repository.GetRentalShops();
-            if (rentalShops.Count <= 0)
-                return NoContent();
+            //if (rentalShops.Count <= 0)
+            //    return NoContent();
 
             return rentalShops;
         }
 
         // GET: api/RentalShops/5
-        [HttpGet("{id}")]
+        [HttpGet("GetRentalShopByID/{id}")]
         public async Task<ActionResult<RentalShop>> GetRentalShop(int id)
         {
             if (!Repository.RentalShopExists(id))
@@ -65,7 +65,7 @@ namespace BikeRentalAgency.Controllers
         }
 
         // DELETE: api/RentalShops/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteRentalShop/{id}")]
         public async Task<ActionResult<RentalShop>> DeleteRentalShop(int id)
         {
             if (!Repository.RentalShopExists(id))
