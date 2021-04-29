@@ -33,7 +33,6 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Employee employee)
         {
-            //TODO Tyler: Add logic to check if rental shop exists
             bool added = await Repository.AddEmployee(employee);
             if (added == false)
                 return View();

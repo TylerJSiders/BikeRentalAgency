@@ -26,6 +26,8 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
         }
 
+      
+
         public async Task<bool> DeleteEmployee(int id)
         {
             bool succeeded = false;
@@ -38,7 +40,7 @@ namespace BikeRentalAgencyUI.Models.Repositories
             return succeeded;
         }
 
-
+       
 
         public async Task<Employee> GetEmployeeByID(int id)
         {
@@ -78,7 +80,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return employees;
             }
         }
-
         public async Task<bool> UpdateEmployee(Employee EmployeeChanges)
         {
             using (var client = new HttpClient())
@@ -89,5 +90,73 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
         }
 
+        public async Task<bool> AddRentalShop(RentalShop rentalShop)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PostAsJsonAsync("api/RentalShops", rentalShop);
+                return res.IsSuccessStatusCode;
+            }
+        }
+        public async Task<RentalShop> GetRentalShopByID(int id)
+        {
+            RentalShop rentalShop = new RentalShop();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync($"api/RentalShops/GetRentalShopByID/{id}");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+
+                    rentalShop = JsonConvert.DeserializeObject<RentalShop>(response);
+                }
+            }
+            return rentalShop;
+        }
+
+        public async Task<List<RentalShop>> GetRentalShops()
+        {
+            List<RentalShop> rentalShops = new List<RentalShop>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/RentalShops");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    rentalShops = JsonConvert.DeserializeObject<List<RentalShop>>(response);
+                }
+                return rentalShops;
+            }
+        }
+        public async Task<bool> DeleteRentalShop(int id)
+        {
+            bool succeeded = false;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.DeleteAsync($"api/RentalShops/DeleteRentalShop/{id}");
+                succeeded = res.IsSuccessStatusCode;
+            }
+            return succeeded;
+        }
+
+        public async Task<bool> UpdateRentalShop(RentalShop ShopChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/RentalShops/UpdateRentalShop/{ShopChanges.ID}", ShopChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
     }
 }
