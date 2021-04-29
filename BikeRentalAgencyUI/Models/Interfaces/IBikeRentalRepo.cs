@@ -23,6 +23,13 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<bool> DeleteRentalShop(int id);
         public Task<bool> UpdateRentalShop(RentalShop ShopChanges);
 
+        // Bike Methods
+        public Task<bool> AddBike(Bike bike);
+        public Task<List<Bike>> GetBikes();
+        public Task<Bike> GetBikeByID(int id);
+        public Task<bool> DeleteBike(int id);
+        public Task<bool> UpdateBike(Bike bike);
+        public bool BikeExists(int id);
 
     }
 }
