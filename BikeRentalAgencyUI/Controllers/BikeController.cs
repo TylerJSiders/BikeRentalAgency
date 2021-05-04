@@ -3,13 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASP;
 using BikeRentalAgencyUI.Models.Interfaces;
 using BikeRentalLibrary;
 
 namespace BikeRentalAgencyUI.Controllers
 {
-	public class BikeController : Controller
+    public class BikeController : Controller
     {
         private IBikeRentalRepo Repository;
 
@@ -20,7 +19,7 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            list<Bike> bikes = await Repository.GetBikes();
+            List<Bike> bikes = await Repository.GetBikes();
             return View(bikes);
         }
 
@@ -35,7 +34,7 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Bike bike)
         {
-            bool added = await Repositorty.AddBike(bike);
+            bool added = await Repository.AddBike(bike);
             if (added == false)
                 return View();
             return RedirectToAction("Index");
@@ -44,7 +43,7 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int BikeID)
         {
-            Bike bike = await Repository.GetBikeById(BikeID);
+            Bike bike = await Repository.GetBikeByID(BikeID);
             return View(bike);
         }
 
@@ -57,16 +56,14 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Details(int BikeID)
         {
-            Bike bike = await Repository.GetBikeById(BikeID);
+            Bike bike = await Repository.GetBikeByID(BikeID);
             return View(bike);
         }
 
         public async Task<ActionResult> Delete(int BikeID)
         {
             bool success = await Repository.DeleteEmployee(BikeID);
-            return RedirectToAction("Index")
+            return RedirectToAction("Index");
         }
     }
 }
-
-

@@ -29,7 +29,6 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<Bike> GetBikeByID(int id);
         public Task<bool> DeleteBike(int id);
         public Task<bool> UpdateBike(Bike bike);
-        public bool BikeExists(int id);
 
     }
 }
