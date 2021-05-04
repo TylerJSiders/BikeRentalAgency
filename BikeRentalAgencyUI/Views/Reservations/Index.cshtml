@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BikeRentalLibrary.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bikes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                Pickup Date
+            </th>
+            <th>
+                Return Date
+            </th>
+            <th>
+                Location Start
+            </th>
+            <th>
+                Location End
+            </th>
+            <th>
+                Reservation Date
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th>
+                Bike Quantity
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                Special Features
+            </th>
+            <th>
+                Payment Type
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bikes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BikeQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialFeatures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType)
+            </td>
+            <td>
+                <a asp-controller="Reservations" asp-action="Edit" asp-route-ReservationID="@item.ID">Edit </a>|
+                <a asp-controller="Reservations" asp-action="Details" asp-route-ReservationID="@item.ID">Details </a>|
+                <a asp-controller="Reservations" asp-action="Delete" asp-route-ReservationID="@item.ID">Delete </a>|
+                @*@Html.ActionLink("Edit", "Edit", item.ID) |*@
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

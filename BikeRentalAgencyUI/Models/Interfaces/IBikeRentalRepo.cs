@@ -37,5 +37,6 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         //public Task<Reservation> GetReservationByName(string lastName);
         public Task<bool> DeleteReservation(int id);
         public Task<bool> UpdateReservation(Reservation reservation);
+
     }
 }

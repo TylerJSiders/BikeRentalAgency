@@ -20,6 +20,10 @@ namespace BikeRentalAgencyUI.Controllers
         public async Task<ActionResult> Index()
         {
             List<Reservation> reservations = await Repository.GetReservations();
+            if(reservations == null)
+            {
+                reservations = new List<Reservation>();
+            }
             return View(reservations);
         }
 
