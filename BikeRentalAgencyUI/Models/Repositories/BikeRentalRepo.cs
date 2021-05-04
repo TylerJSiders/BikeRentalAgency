@@ -6,7 +6,6 @@ using BikeRentalAgencyUI.Models.Interfaces;
 using BikeRentalLibrary;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using ASP;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
@@ -141,12 +140,20 @@ namespace BikeRentalAgencyUI.Models.Repositories
             return succeeded;
         }
         public async Task<bool> UpdateRentalShop(RentalShop ShopChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/RentalShops/UpdateRentalShop/{ShopChanges.ID}", ShopChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
 
         public async Task<bool> AddBike(Bike bike)
         {
-            using (var client = new HtttpClient())
+            using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(BaseUrl);
+                client.BaseAddress = new Uri(BaseURL);
                 HttpResponseMessage res = await client.PostAsJsonAsync("api/Bikes", bike);
                 return res.IsSuccessStatusCode;
             }
@@ -164,7 +171,7 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 if (res.IsSuccessStatusCode)
                 {
                     var response = res.Content.ReadAsStringAsync().Result;
-                    bikes = JsonConvert.DeserializeObject<List<RentalShop>>(response);
+                    bikes = JsonConvert.DeserializeObject<List<Bike>>(response);
                 }
                 return bikes;
             }
@@ -183,7 +190,7 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 {
                     var response = res.Content.ReadAsStringAsync().Result;
 
-                    bikes = JsonConvert.DeserializeObject<RentalShop>(response);
+                    bikes = JsonConvert.DeserializeObject<Bike>(response);
                 }
             }
             return bikes;
