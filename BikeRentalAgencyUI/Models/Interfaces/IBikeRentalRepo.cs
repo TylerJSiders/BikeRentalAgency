@@ -16,7 +16,7 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<bool> UpdateEmployee(Employee EmployeeChanges);
         public Task<bool> DeleteEmployee(int id);
 
-        //Location Methods
+        //Rental Shop Methods
         public Task<bool> AddRentalShop(RentalShop rentalShop);
         public Task<List<RentalShop>> GetRentalShops();
         public Task<RentalShop> GetRentalShopByID(int id);
@@ -31,5 +31,12 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<bool> UpdateBike(Bike bike);
         public bool BikeExists(int id);
 
+        //Reservations
+        public Task<bool> AddReservation(Reservation reservation);
+        public Task<List<Reservation>> GetReservations();
+        public Task<Reservation> GetReservationByID(int id);
+        //public Task<Reservation> GetReservationByName(string lastName);
+        public Task<bool> DeleteReservation(int id);
+        public Task<bool> UpdateReservation(Reservation reservation);
     }
 }

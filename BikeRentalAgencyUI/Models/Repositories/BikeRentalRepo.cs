@@ -215,5 +215,72 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
+
+        public async Task<bool> AddReservation(Reservation reservation)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PostAsJsonAsync("api/Reservations", reservation);
+                return res.IsSuccessStatusCode;
+            }
+        }
+        public async Task<bool> DeleteReservation(int id)
+        {
+            bool succeeded = false;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.DeleteAsync($"api/Reservations/DeleteReservation/{id}");
+                succeeded = res.IsSuccessStatusCode;
+            }
+            return succeeded;
+        }
+        public async Task<Reservation> GetReservationByID(int id)
+        {
+            Reservation reservation = new Reservation();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync($"api/Reservations/GetReservationByID/{id}");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+
+                    reservation = JsonConvert.DeserializeObject<Reservation>(response);
+                }
+            }
+            return reservation;
+        }
+        public async Task<List<Reservation>> GetReservations()
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Reservations");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    reservations = JsonConvert.DeserializeObject<List<Reservation>>(response);
+                }
+                return reservations;
+            }
+        }
+        public async Task<bool> UpdateReservation(Reservation ReservationChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Reservations/{ReservationChanges.ID}", ReservationChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
     }
 }
