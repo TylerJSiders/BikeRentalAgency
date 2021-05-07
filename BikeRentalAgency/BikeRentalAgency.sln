@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalLibrary", "..\Bik
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalRazor", "..\BikeRentalRazor\BikeRentalRazor.csproj", "{CE7148CB-FD33-4E9D-B828-93D404F64FA2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalAgencyUI", "..\BikeRentalAgencyUI\BikeRentalAgencyUI.csproj", "{46590FD3-8FED-48DD-A450-D11A2E8DD431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CE7148CB-FD33-4E9D-B828-93D404F64FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7148CB-FD33-4E9D-B828-93D404F64FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7148CB-FD33-4E9D-B828-93D404F64FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46590FD3-8FED-48DD-A450-D11A2E8DD431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46590FD3-8FED-48DD-A450-D11A2E8DD431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46590FD3-8FED-48DD-A450-D11A2E8DD431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46590FD3-8FED-48DD-A450-D11A2E8DD431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,6 @@ namespace BikeRentalLibrary
         public decimal TotalPrice { get; set; }
         [Required]
         public int BikeQuantity { get; set; }
-        [Required]
         public decimal Discount { get; set; }
        // public List<SpecialFeature> SpecialFeatures { get; set; } = new List<SpecialFeature>();
         [Required]
