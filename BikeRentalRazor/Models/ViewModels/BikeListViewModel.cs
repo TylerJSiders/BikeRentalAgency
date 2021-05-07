@@ -9,5 +9,7 @@ namespace BikeRentalRazor.Models.ViewModels
     {
         public IEnumerable<Bike> Bikes { get; set; }
         public PagingInfo PagingInfo { get; set; }
+
+        public List<RentalShop> Shops { get; set; }
     }
 }

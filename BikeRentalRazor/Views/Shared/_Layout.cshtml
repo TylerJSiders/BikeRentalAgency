@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BikeListViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -11,7 +12,10 @@
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">
-            Put something useful here later
+            @foreach (var shop in Model.Shops)
+            {
+                <a class="btn btn-block btn-outline-secondary" asp-controller="Home" asp-action="Index" asp-route-currentStoreID="@shop.ID">@shop.City</a>
+            }
         </div>
         <div class="col-9">
             @RenderBody()
