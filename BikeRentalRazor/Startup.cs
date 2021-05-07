@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BikeRentalRazor.Models;
 
 namespace BikeRentalRazor
 {
@@ -18,7 +19,8 @@ namespace BikeRentalRazor
         
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddControllersWithViews();
+            services.AddScoped<IBikeRentalRepo, BikeRentalRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,15 +30,21 @@ namespace BikeRentalRazor
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute("pagination",
+"Products/Page{productPage}",
+new { Controller = "Home", action = "Index" });
+                //endpoints.MapControllerRoute("CurrentStore", "{CurrentStoreID}/Page{productPage:int", new { Controller = "Home", action = "Index" });
+                //endpoints.MapControllerRoute("page", "Page{productPage:int}", new { Controller = "Home", action = "Index", productPage = 0 });
+                //endpoints.MapControllerRoute("CurrentStore", "{CurrentStoreID}", new { Controller = "Home", action = "Index", productPage = 0 });
+                //endpoints.MapControllerRoute("pagination", "Products/Page{productPage}", new { Controller = "Home", action = "Index", productPage = 0 });
+                endpoints.MapDefaultControllerRoute();
+                
             });
         }
     }
