@@ -21,6 +21,11 @@ namespace BikeRentalRazor
         {
             services.AddControllersWithViews();
             services.AddScoped<IBikeRentalRepo, BikeRentalRepo>();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +37,7 @@ namespace BikeRentalRazor
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -44,6 +50,7 @@ new { Controller = "Home", action = "Index" });
                 //endpoints.MapControllerRoute("CurrentStore", "{CurrentStoreID}", new { Controller = "Home", action = "Index", productPage = 0 });
                 //endpoints.MapControllerRoute("pagination", "Products/Page{productPage}", new { Controller = "Home", action = "Index", productPage = 0 });
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
                 
             });
         }

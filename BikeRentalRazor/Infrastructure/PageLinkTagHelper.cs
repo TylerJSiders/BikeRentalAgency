@@ -24,7 +24,7 @@ namespace BikeRentalRazor.Infrastructure
         public ViewContext ViewContext { get; set; }
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
-       
+        
         //[HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         //public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
 
@@ -38,7 +38,7 @@ namespace BikeRentalRazor.Infrastructure
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new TagBuilder("div");
-            for (int i = 0; i <= PageModel.TotalPages - 1; i++)
+            for (int i = 0; i <= PageModel.TotalPages - 1;)
             {
                 TagBuilder tag = new TagBuilder("a");
 
@@ -46,11 +46,13 @@ namespace BikeRentalRazor.Infrastructure
                 //tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
                 tag.Attributes["href"] = urlHelper.Action(PageAction,
                 new { productPage = i });
+                
                 if (PageClassesEnabled)
                 {
                     tag.AddCssClass(PageClass);
                     tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
+                i = i + 1;
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
 

@@ -21,7 +21,7 @@ namespace BikeRentalRazor.Controllers
             List<Bike> bikes = await repository.GetBikes();
             if (bikes == null)
                 bikes = new List<Bike>();
-            var bikeToView = bikes.Where(b => currentStoreID == null || b.CurrentLocationID == currentStoreID).OrderBy(b => b.ID).Skip((productPage - 1) + pageSize).Take(pageSize);
+            var bikeToView = bikes.Where(b => currentStoreID == null || b.CurrentLocationID == currentStoreID).OrderBy(b => b.ID).Skip((productPage - 1) * pageSize).Take(pageSize);
             //Setup Paging info
             PagingInfo pagingInfo = new PagingInfo();
             pagingInfo.CurrentPage = productPage;

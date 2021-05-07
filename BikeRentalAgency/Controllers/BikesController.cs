@@ -34,8 +34,8 @@ namespace BikeRentalAgency.Controllers
             return bikes;
         }
 
-        // GET: api/Bike/5
-        [HttpGet("{id}")]
+        // GET: api/Bikes/5
+        [HttpGet("GetBikeByID/{id}")]
         public async Task<ActionResult<Bike>> GetBikeByID(int id)
         {
             if (!Repository.BikeExists(id))

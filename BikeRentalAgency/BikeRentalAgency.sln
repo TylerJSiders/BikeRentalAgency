@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalAgency", "BikeRen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalLibrary", "..\BikeRentalLibrary\BikeRentalLibrary.csproj", "{21B31F74-3F44-4254-98CC-F59D626FBB2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeRentalRazor", "..\BikeRentalRazor\BikeRentalRazor.csproj", "{CE7148CB-FD33-4E9D-B828-93D404F64FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeRentalRazor", "..\BikeRentalRazor\BikeRentalRazor.csproj", "{CE7148CB-FD33-4E9D-B828-93D404F64FA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
