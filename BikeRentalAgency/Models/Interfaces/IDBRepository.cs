@@ -47,11 +47,11 @@ namespace BikeRentalAgency.Models.Interfaces
         public Task<Reservation> DeleteReservation(int id);
         public Task<Reservation> UpdateReservation(Reservation reservation);
         //Reservation Details Methods
-        public Task<ReservationDetails> AddReservationDetails(ReservationDetails reservationDetails);
-        public Task<List<ReservationDetails>> GetReservationDetails();
-        public Task<ReservationDetails> GetReservationDetailsById(int id);
-        public Task<ReservationDetails> DeleteReservationDetails(int id);
-        public Task<ReservationDetails> UpdateReservationDetails(ReservationDetails reservationDetails);
+        //public Task<ReservationDetails> AddReservationDetails(ReservationDetails reservationDetails);
+        //public Task<List<ReservationDetails>> GetReservationDetails();
+        //public Task<ReservationDetails> GetReservationDetailsById(int id);
+        //public Task<ReservationDetails> DeleteReservationDetails(int id);
+        //public Task<ReservationDetails> UpdateReservationDetails(ReservationDetails reservationDetails);
         //Bike Methods
         public Task<Bike> AddBike(Bike bike);
         public Task<List<Bike>> GetBikes();

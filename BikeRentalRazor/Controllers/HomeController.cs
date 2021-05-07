@@ -28,10 +28,9 @@ namespace BikeRentalRazor.Controllers
             pagingInfo.ItemsPerPage = pageSize;
             pagingInfo.TotalItems = bikes.Count;
 
-            BikeListViewModel bikeListViewModel = new();
+            BikeListViewModel bikeListViewModel = new BikeListViewModel(await repository.GetRentalShops());
             bikeListViewModel.Bikes = bikeToView;
             bikeListViewModel.PagingInfo = pagingInfo;
-            bikeListViewModel.Shops = await repository.GetRentalShops();
 
             return View(bikeListViewModel);
         }
