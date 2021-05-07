@@ -18,7 +18,7 @@ namespace BikeRentalRazor.Models
 
         //Rental Shop Methods
         public Task<bool> AddRentalShop(RentalShop rentalShop);
-        public Task<List<RentalShop>> GetRentalShops();
+        public Task<IQueryable<RentalShop>> GetRentalShops();
         public Task<RentalShop> GetRentalShopByID(int id);
         public Task<bool> DeleteRentalShop(int id);
         public Task<bool> UpdateRentalShop(RentalShop ShopChanges);

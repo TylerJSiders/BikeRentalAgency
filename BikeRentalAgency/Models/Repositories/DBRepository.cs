@@ -187,9 +187,9 @@ namespace BikeRentalAgency.Models.Repositories
             var RentalShop = await context.Shops.OrderByDescending(s => s.ID).FirstOrDefaultAsync();
             return RentalShop;
         }
-        public async Task<List<RentalShop>> GetRentalShops()
+        public async Task<IQueryable<RentalShop>> GetRentalShops()
         {
-            return await context.Shops.ToListAsync();
+            return context.Shops;
         }
         public async Task<RentalShop> GetRentalShopByID(int id)
         {

@@ -109,9 +109,9 @@ namespace BikeRentalRazor.Models
             }
             return rentalShop;
         }
-        public async Task<List<RentalShop>> GetRentalShops()
+        public async Task<IQueryable<RentalShop>> GetRentalShops()
         {
-            List<RentalShop> rentalShops = new List<RentalShop>();
+            IQueryable<RentalShop> rentalShops = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseURL);
@@ -122,8 +122,9 @@ namespace BikeRentalRazor.Models
                 if (res.IsSuccessStatusCode)
                 {
                     var response = res.Content.ReadAsStringAsync().Result;
-                    rentalShops = JsonConvert.DeserializeObject<List<RentalShop>>(response);
+                    rentalShops = JsonConvert.DeserializeObject<IQueryable<RentalShop>>(response);   
                 }
+                
                 return rentalShops;
             }
         }

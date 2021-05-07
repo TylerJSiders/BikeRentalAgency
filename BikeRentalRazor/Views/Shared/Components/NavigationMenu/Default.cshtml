@@ -1,0 +1,15 @@
+﻿@model List<RentalShop>
+
+<a class="btn btn-block btn-outline-secondary" asp-action="Index"
+   asp-controller="Home" asp-route-category="">
+    Home
+</a>
+@foreach (RentalShop Shop in Model)
+{
+    <a class="btn btn-block btn-outline-secondary"
+       asp-action="Index" asp-controller="Home"
+       asp-route-category="@Shop.ID"
+       asp-route-productPage="1">
+        @Shop.ID
+        </a>
+}

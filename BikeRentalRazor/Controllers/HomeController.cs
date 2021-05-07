@@ -16,12 +16,12 @@ namespace BikeRentalRazor.Controllers
         {
             repository = repo;
         }
-        public async Task<ActionResult> Index( int productPage = 0)
+        public async Task<ActionResult> Index(int? storeID, int productPage = 0)
         {
             List<Bike> bikes = await repository.GetBikes();
             if (bikes == null)
                 bikes = new List<Bike>();
-            var bikeToView = bikes.OrderBy(b => b.ID).Skip((productPage - 1) + pageSize).Take(pageSize);
+            var bikeToView = bikes.Where(b => storeID == null || b.CurrentLocationID == storeID).OrderBy(b => b.ID).Skip((productPage - 1) + pageSize).Take(pageSize);
             //Setup Paging info
             PagingInfo pagingInfo = new PagingInfo();
             pagingInfo.CurrentPage = productPage;

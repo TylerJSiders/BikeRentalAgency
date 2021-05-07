@@ -34,7 +34,7 @@ namespace BikeRentalAgency.Models.Interfaces
         public Task<SpecialFeature> UpdateSpecialFeature(SpecialFeature FeatureUpdate);
         //Rental Shop Methods
         public Task<RentalShop> AddRentalShop(RentalShop rentalShop);
-        public Task<List<RentalShop>> GetRentalShops();
+        public Task<IQueryable<RentalShop>> GetRentalShops();
         public Task<RentalShop> GetRentalShopByID(int id);
         public bool RentalShopExists(int id);
         public Task<RentalShop> DeleteRentalShop(int id);
