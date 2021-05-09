@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using BikeRentalAgency.Models.Interfaces;
 using BikeRentalAgency.Models.Repositories;
 
+
 namespace BikeRentalAgency
 {
     public class Startup
@@ -58,6 +59,8 @@ namespace BikeRentalAgency
             {
                 endpoints.MapControllers();
             });
+
+           
         }
     }
 }

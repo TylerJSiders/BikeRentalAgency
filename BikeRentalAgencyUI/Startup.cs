@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BikeRentalAgencyUI.Models.Interfaces;
 using BikeRentalAgencyUI.Models.Repositories;
+using Microsoft.AspNetCore.Identity;
+using BikeRentalAgencyUI.Models;
 
 namespace BikeRentalAgencyUI
 {

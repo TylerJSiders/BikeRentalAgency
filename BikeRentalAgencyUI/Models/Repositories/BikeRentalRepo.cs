@@ -26,8 +26,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
         }
 
-      
-
         public async Task<bool> DeleteEmployee(int id)
         {
             bool succeeded = false;
@@ -85,7 +83,7 @@ namespace BikeRentalAgencyUI.Models.Repositories
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseURL);
-                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Employees/{EmployeeChanges.ID}", EmployeeChanges);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Employees/UpdateEmployee/{EmployeeChanges.ID}", EmployeeChanges);
                 return res.IsSuccessStatusCode;
             }
         }
@@ -157,6 +155,147 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 HttpResponseMessage res = await client.PutAsJsonAsync($"api/RentalShops/UpdateRentalShop/{ShopChanges.ID}", ShopChanges);
                 return res.IsSuccessStatusCode;
             }
+        }
+
+        public async Task<bool> AddReservation(Reservation reservation)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PostAsJsonAsync("api/Reservations", reservation);
+                return res.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<List<Reservation>> GetReservations()
+        {
+            List<Reservation> reservations = new List<Reservation>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Reservations");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    reservations = JsonConvert.DeserializeObject<List<Reservation>>(response);
+                }
+                return reservations;
+            }
+        }
+
+        public async Task<Reservation> GetReservationByID(int id)
+        {
+            Reservation reservation = new Reservation();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync($"api/Reservations/GetReservationByID/{id}");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+
+                    reservation = JsonConvert.DeserializeObject<Reservation>(response);
+                }
+            }
+            return reservation;
+        }
+
+        public async Task<bool> UpdateReservation(Reservation reservationChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Reservations/UpdateReservation/{reservationChanges.ID}", reservationChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<bool> DeleteReservation(int id)
+        {
+            bool succeeded = false;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.DeleteAsync($"api/Reservations/DeleteReservation/{id}");
+                succeeded = res.IsSuccessStatusCode;
+            }
+            return succeeded;
+        }
+
+        public async Task<bool> AddBike(Bike bike)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PostAsJsonAsync("api/Bikes", bike);
+                return res.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<List<Bike>> GetBikes()
+        {
+            List<Bike> bikes = new List<Bike>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Bikes");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    bikes = JsonConvert.DeserializeObject<List<Bike>>(response);
+                }
+                return bikes;
+            }
+        }
+
+        public async Task<Bike> GetBikeByID(int id)
+        {
+            Bike bike = new Bike();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync($"api/Bikes/GetBikeByID/{id}");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    bike = JsonConvert.DeserializeObject<Bike>(response);
+                }
+            }
+            return bike;
+        }
+
+        public async Task<bool> UpdateBike(Bike bikeChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Bikes/UpdateBike/{bikeChanges.ID}", bikeChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<bool> DeleteBike(int id)
+        {
+            bool succeeded = false;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.DeleteAsync($"api/Bikes/DeleteBike/{id}");
+                succeeded = res.IsSuccessStatusCode;
+            }
+            return succeeded;
         }
     }
 }

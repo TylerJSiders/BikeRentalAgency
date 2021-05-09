@@ -36,7 +36,7 @@ namespace BikeRentalAgency.Controllers
 
         // GET: api/RentalShops/5
         [HttpGet("GetRentalShopByID/{id}")]
-        public async Task<ActionResult<RentalShop>> GetRentalShop(int id)
+        public async Task<ActionResult<RentalShop>> GetRentalShopByID(int id)
         {
             if (!Repository.RentalShopExists(id))
                 return NoContent();

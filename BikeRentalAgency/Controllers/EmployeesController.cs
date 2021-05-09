@@ -27,7 +27,8 @@ namespace BikeRentalAgency.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            return await Repository.GetEmployees();
+            var employees = await Repository.GetEmployees();
+            return employees;
         }
 
         [HttpGet("GetEmployeeByID/{id}")]
@@ -43,7 +44,7 @@ namespace BikeRentalAgency.Controllers
 
         //    // PUT: api/Employees/5
         //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("UpdateEmployee/{id}")]
         public async Task<ActionResult<Employee>> PutEmployee(int id, Employee employee)
         {
             if (id != employee.ID)
@@ -63,9 +64,10 @@ namespace BikeRentalAgency.Controllers
         {
             if (!Repository.RentalShopExists(employee.ShopID))
                 return StatusCode(12, $"Shop with Shop ID {employee.ShopID} does not exist.");
-            var createdEmployee = await Repository.AddEmployee(employee);
-            return StatusCode(201, createdEmployee);
-            //return CreatedAtAction("GetEmployee", new { id = employee.ID }, employee);
+            return await Repository.AddEmployee(employee);
+            //var createdEmployee = await Repository.AddEmployee(employee);
+            //return StatusCode(201, createdEmployee);
+            ////return CreatedAtAction("GetEmployee", new { id = employee.ID }, employee);
         }
 
         //    // DELETE: api/Employees/5

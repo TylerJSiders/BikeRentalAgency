@@ -69,7 +69,7 @@ namespace BikeRentalAgency.Controllers
         }
 
         // DELETE: api/Bikes/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteBike/{id}")]
         public async Task<ActionResult<Bike>> DeleteBike(int id)
         {
             if (!Repository.BikeExists(id))

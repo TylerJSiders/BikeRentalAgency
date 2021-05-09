@@ -49,7 +49,7 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(Employee employee)
         {
-            bool Succeeded = await Repository.UpdateEmployee(employee);
+            await Repository.UpdateEmployee(employee);
             return RedirectToAction("Index");
         }
 
@@ -61,7 +61,7 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Delete(int EmployeeID)
         {
-            bool success = await Repository.DeleteEmployee(EmployeeID);
+            await Repository.DeleteEmployee(EmployeeID);
             return RedirectToAction("Index");
         }
     }

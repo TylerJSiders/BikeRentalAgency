@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BikeRentalLibrary.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Reservations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                Pickup Date
+            </th>
+            <th>
+                Return Date
+            </th>
+            <th>
+                Location Start
+            </th>
+            <th>
+                Location End
+            </th>
+            <th>
+                Reservation Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PickupDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationDate)
+                </td>
+                <td>
+                    <a asp-controller="Reservations" asp-action="Edit" asp-route-ReservationID="@item.ID">Edit </a>|
+                    <a asp-controller="Reservations" asp-action="Details" asp-route-ReservationID="@item.ID">Details </a>|
+                    <a asp-controller="Reservations" asp-action="Delete" asp-route-ReservationID="@item.ID">Delete </a>|
+                    @*@Html.ActionLink("Edit", "Edit", item.ID) |*@
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" asp-controller="LoggedIn">Back to Administrator Home Page</a>
+</div>

@@ -11,8 +11,8 @@ namespace BikeRentalLibrary
         public int ID { get; set; }
         [Required]
         public List<Bike> Bikes { get; set; } = new List<Bike>();
-        [Required]
-        public int CustomerID { get; set; }
+        //[Required]
+        //public int CustomerID { get; set; }
         [Required]
         public DateTime PickupDate { get; set; }
         [Required]

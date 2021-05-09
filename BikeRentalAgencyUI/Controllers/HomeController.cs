@@ -1,4 +1,5 @@
 ﻿using BikeRentalAgencyUI.Models;
+using BikeRentalLibrary;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,15 +19,31 @@ namespace BikeRentalAgencyUI.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            AdminLogin admin = new AdminLogin();
+
+            return View(admin);
+        }
+        [HttpPost]
+        public ActionResult Index(AdminLogin admin)
+        {
+            if (admin.Username != "Admin123" && admin.Password != "Secret!@#")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "LoggedIn");
+            }
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

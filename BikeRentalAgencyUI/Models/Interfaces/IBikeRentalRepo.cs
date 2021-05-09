@@ -23,6 +23,19 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<bool> DeleteRentalShop(int id);
         public Task<bool> UpdateRentalShop(RentalShop ShopChanges);
 
+        //Reservation Methods
+        public Task<bool> AddReservation(Reservation reservation);
+        public Task<List<Reservation>> GetReservations();
+        public Task<Reservation> GetReservationByID(int id);
+        public Task<bool> UpdateReservation(Reservation reservationChanges);
+        public Task<bool> DeleteReservation(int id);
+
+        //Bike Methods
+        public Task<bool> AddBike(Bike bike);
+        public Task<List<Bike>> GetBikes();
+        public Task<Bike> GetBikeByID(int id);
+        public Task<bool> UpdateBike(Bike bikeChanges);
+        public Task<bool> DeleteBike(int id);
 
     }
 }

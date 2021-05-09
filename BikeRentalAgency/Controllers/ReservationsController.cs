@@ -28,19 +28,19 @@ namespace BikeRentalAgency.Controllers
         public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
         {
             var reservations = await Repository.GetReservations();
-            if (reservations.Count <= 0)
-                return NoContent();
+            //if (reservations.Count <= 0)
+            //    return NoContent();
 
             return reservations;
         }
 
         // GET: api/Reservations/1
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Reservation>> GetReservations(int id)
+        [HttpGet("GetReservationByID/{id}")]
+        public async Task<ActionResult<Reservation>> GetReservationByID(int id)
         {
             if (!Repository.ReservationExists(id))
                 return NoContent();
-            return await Repository.GetReservationById(id);
+            return await Repository.GetReservationByID(id);
         }
 
         // PUT: api/Reservations/1
@@ -65,14 +65,14 @@ namespace BikeRentalAgency.Controllers
                 return NoContent();
             if (!Repository.RentalShopExists(reservation.LocationEnd))
                 return NoContent();
-            if (!Repository.CustomerExists(reservation.CustomerID))
-                return NoContent();
+            //if (!Repository.CustomerExists(reservation.CustomerID))
+            //    return NoContent();
 
             return await Repository.AddReservation(reservation);
         }
 
         // DELETE: api/Reservation/1
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteReservation/{id}")]
         public async Task<ActionResult<Reservation>> DeleteReservation(int id)
         {
             if (!Repository.ReservationExists(id))
