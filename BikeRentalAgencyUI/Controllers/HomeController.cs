@@ -29,7 +29,7 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpPost]
         public ActionResult Index(AdminLogin admin)
         {
-            if (admin.Username != "Admin123" && admin.Password != "Secret!@#")
+            if (admin.Username != "Admin123" || admin.Password != "Secret!@#")
             {
                 return View();
             }

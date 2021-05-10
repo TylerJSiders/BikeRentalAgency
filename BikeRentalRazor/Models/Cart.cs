@@ -9,6 +9,7 @@ namespace BikeRentalRazor.Models
     public class Cart
     {
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
+        public List<Bike> Bikes { get; set; } = new List<Bike>();
         public virtual void AddItem(Bike bike, int quantity)
         {
             CartLine line = Lines
@@ -21,6 +22,7 @@ namespace BikeRentalRazor.Models
                     Bike = bike,
                     Quantity = quantity
                 });
+                Bikes.Add(bike);
             }
             else
             {
