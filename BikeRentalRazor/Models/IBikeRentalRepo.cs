@@ -37,6 +37,12 @@ namespace BikeRentalRazor.Models
         //public Task<Reservation> GetReservationByName(string lastName);
         public Task<bool> DeleteReservation(int id);
         public Task<bool> UpdateReservation(Reservation reservation);
+        //Customer Methods
+        public Task<bool> AddCustomer(Customer customer);
+        public Task<bool> DeleteCustomer(int id);
+        public Task<Reservation> GetCustomerByID(int id);
+        public Task<List<Customer>> GetCustomers();
+        public Task<bool> UpdateCustomer(Customer CustomerChanges);
 
     }
 }

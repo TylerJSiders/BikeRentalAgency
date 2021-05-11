@@ -36,6 +36,12 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<Bike> GetBikeByID(int id);
         public Task<bool> UpdateBike(Bike bikeChanges);
         public Task<bool> DeleteBike(int id);
+        // Customer Methods
+        public Task<bool> AddCustomer(Customer customer);
+        public Task<List<Customer>> GetCustomers();
+        public Task<Customer> GetCustomerByID(int id);
+        public Task<bool> UpdateCustomer(Customer customerChanges);
+        public Task<bool> DeleteCustomer(int id);
 
     }
 }
