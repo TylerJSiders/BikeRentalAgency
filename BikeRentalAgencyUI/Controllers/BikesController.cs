@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BikeRentalAgencyUI.Models.ViewModels;
 
 namespace BikeRentalAgencyUI.Controllers
 {
@@ -19,16 +20,18 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<Bike> employees = await Repository.GetBikes();
-            return View(employees);
+            BikeIndexVM vm = new BikeIndexVM(await Repository.GetBikes(), await Repository.GetRentalShops());
+
+
+            return View(vm);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             Bike bike = new Bike();
-
-            return View(bike);
+            EditBikeVM vm = new EditBikeVM(new Bike(), await Repository.GetRentalShops());
+            return View(vm);
         }
         [HttpPost]
         public async Task<ActionResult> Create(Bike bike)
@@ -43,8 +46,8 @@ namespace BikeRentalAgencyUI.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int BikeID)
         {
-            Bike bike = await Repository.GetBikeByID(BikeID);
-            return View(bike);
+            EditBikeVM vm = new EditBikeVM(await Repository.GetBikeByID(BikeID), await Repository.GetRentalShops());
+            return View(vm);
         }
         [HttpPost]
         public async Task<ActionResult> Edit(Bike bike)
@@ -55,8 +58,8 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Details(int BikeID)
         {
-            Bike bike = await Repository.GetBikeByID(BikeID);
-            return View(bike);
+            EditBikeVM vm = new EditBikeVM(await Repository.GetBikeByID(BikeID), await Repository.GetRentalShops());
+            return View(vm);
         }
 
         public async Task<ActionResult> Delete(int BikeID)

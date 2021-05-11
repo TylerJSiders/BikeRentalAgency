@@ -25,7 +25,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> DeleteEmployee(int id)
         {
             bool succeeded = false;
@@ -37,9 +36,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return succeeded;
         }
-
-       
-
         public async Task<Employee> GetEmployeeByID(int id)
         {
             Employee employee = new Employee();
@@ -59,7 +55,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return employee;
         }
-
         public async Task<List<Employee>> GetEmployees()
         {
             List<Employee> employees = new List<Employee>();
@@ -87,7 +82,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> AddRentalShop(RentalShop rentalShop)
         {
             using (var client = new HttpClient())
@@ -116,7 +110,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return rentalShop;
         }
-
         public async Task<List<RentalShop>> GetRentalShops()
         {
             List<RentalShop> rentalShops = new List<RentalShop>();
@@ -146,7 +139,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return succeeded;
         }
-
         public async Task<bool> UpdateRentalShop(RentalShop ShopChanges)
         {
             using (var client = new HttpClient())
@@ -156,7 +148,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> AddReservation(Reservation reservation)
         {
             using (var client = new HttpClient())
@@ -166,7 +157,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<List<Reservation>> GetReservations()
         {
             List<Reservation> reservations = new List<Reservation>();
@@ -185,7 +175,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return reservations;
             }
         }
-
         public async Task<Reservation> GetReservationByID(int id)
         {
             Reservation reservation = new Reservation();
@@ -205,7 +194,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return reservation;
         }
-
         public async Task<bool> UpdateReservation(Reservation reservationChanges)
         {
             using (var client = new HttpClient())
@@ -215,7 +203,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> DeleteReservation(int id)
         {
             bool succeeded = false;
@@ -227,7 +214,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return succeeded;
         }
-
         public async Task<bool> AddBike(Bike bike)
         {
             using (var client = new HttpClient())
@@ -237,7 +223,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<List<Bike>> GetBikes()
         {
             List<Bike> bikes = new List<Bike>();
@@ -256,7 +241,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return bikes;
             }
         }
-
         public async Task<Bike> GetBikeByID(int id)
         {
             Bike bike = new Bike();
@@ -275,7 +259,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return bike;
         }
-
         public async Task<bool> UpdateBike(Bike bikeChanges)
         {
             using (var client = new HttpClient())
@@ -285,7 +268,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> DeleteBike(int id)
         {
             bool succeeded = false;
@@ -297,7 +279,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return succeeded;
         }
-
         public async Task<bool> AddCustomer(Customer customer)
         {
             using (var client = new HttpClient())
@@ -307,7 +288,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<List<Customer>> GetCustomers()
         {
             List<Customer> customers = new List<Customer>();
@@ -326,7 +306,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return customers;
             }
         }
-
         public async Task<Customer> GetCustomerByID(int id)
         {
             Customer customer = new Customer();
@@ -345,7 +324,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return customer;
         }
-
         public async Task<bool> UpdateCustomer(Customer customerChanges)
         {
             using (var client = new HttpClient())
@@ -355,7 +333,6 @@ namespace BikeRentalAgencyUI.Models.Repositories
                 return res.IsSuccessStatusCode;
             }
         }
-
         public async Task<bool> DeleteCustomer(int id)
         {
             bool succeeded = false;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BikeRentalAgencyUI.Models.Interfaces;
 using BikeRentalLibrary;
+using BikeRentalAgencyUI.Models.ViewModels;
 
 namespace BikeRentalAgencyUI.Controllers
 {
@@ -19,16 +20,16 @@ namespace BikeRentalAgencyUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<Employee> employees = await Repository.GetEmployees();
-            return View(employees);
+            EmployeeIndexVM vm = new EmployeeIndexVM(await Repository.GetEmployees(), await Repository.GetRentalShops());
+            return View(vm);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             Employee employee = new Employee();
-
-            return View(employee);
+            EditEmployeeVM vm = new EditEmployeeVM(new Employee(), await Repository.GetRentalShops());
+            return View(vm);
         }
         [HttpPost]
         public async Task<ActionResult> Create(Employee employee)
@@ -44,7 +45,8 @@ namespace BikeRentalAgencyUI.Controllers
         public async Task<ActionResult> Edit(int EmployeeID)
         {
             Employee employee = await Repository.GetEmployeeByID(EmployeeID);
-            return View(employee);
+            EditEmployeeVM vm = new EditEmployeeVM(await Repository.GetEmployeeByID(EmployeeID), await Repository.GetRentalShops());
+            return View(vm);
         }
         [HttpPost]
         public async Task<ActionResult> Edit(Employee employee)
@@ -56,7 +58,8 @@ namespace BikeRentalAgencyUI.Controllers
         public async Task<ActionResult> Details(int EmployeeID)
         {
             Employee employee = await Repository.GetEmployeeByID(EmployeeID);
-            return View(employee);
+            EditEmployeeVM vm = new EditEmployeeVM(await Repository.GetEmployeeByID(EmployeeID), await Repository.GetRentalShops());
+            return View(vm);
         }
 
         public async Task<ActionResult> Delete(int EmployeeID)

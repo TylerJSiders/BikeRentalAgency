@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BikeRentalLibrary.Bike>
+﻿@model BikeIndexVM
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
+                Bike ID
             </th>
             <th>
                 Bike Name
@@ -33,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Bikes)
         {
             <tr>
                 <td>
@@ -43,7 +43,18 @@
                     @Html.DisplayFor(modelItem => item.BikeName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CurrentLocationID)
+                    @*@Html.DisplayFor(modelItem => item.CurrentLocationID)*@
+                    @{
+                        foreach (var shop in Model.RentalShops)
+                        {
+                            if (shop.ID == item.CurrentLocationID)
+                            {
+
+                                @shop.ShopName
+
+                            }
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.isReserved)
