@@ -37,6 +37,7 @@ namespace BikeRentalRazor.Controllers
             BLVM.Reservation.BikeQuantity = cart.Lines.Count();
             BLVM.Reservation.TotalPrice = cart.ComputeTotalValue();
             BLVM.Reservation.Bikes = cart.Bikes;
+            BLVM.Reservation.Discount = 0;
 
             if (ModelState.IsValid)
             {

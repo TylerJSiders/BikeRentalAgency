@@ -1,4 +1,5 @@
 ﻿using BikeRentalAgencyUI.Models;
+using BikeRentalAgencyUI.Models.Interfaces;
 using BikeRentalLibrary;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,10 +14,12 @@ namespace BikeRentalAgencyUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBikeRentalRepo _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBikeRentalRepo repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         [HttpGet]
@@ -27,9 +30,11 @@ namespace BikeRentalAgencyUI.Controllers
             return View(admin);
         }
         [HttpPost]
-        public ActionResult Index(AdminLogin admin)
+        public async Task<ActionResult> Index(AdminLogin admin)
         {
-            if (admin.Username != "Admin123" || admin.Password != "Secret!@#")
+            var admins = await _repo.GetAdmins();
+            var adminlogin = admins.Where(a => a.Username == admin.Username && a.Password == admin.Password).FirstOrDefault();
+            if (adminlogin == null)
             {
                 return View();
             }
