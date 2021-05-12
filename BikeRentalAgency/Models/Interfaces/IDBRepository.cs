@@ -55,5 +55,12 @@ namespace BikeRentalAgency.Models.Interfaces
         public Task<Bike> UpdateBike(Bike bike);
         public bool BikeExists(int id);
 
+        //Admin Methods
+        public Task<AdminLogin> AddAdmin(AdminLogin admin);
+        public Task<List<AdminLogin>> GetAdmins();
+        public Task<AdminLogin> GetAdminByID(int id);
+        public bool AdminExists(int id);
+        public Task<AdminLogin> DeleteAdmin(int id);
+        public Task<AdminLogin> UpdateAdmin(AdminLogin adminChanges);
     }
 }

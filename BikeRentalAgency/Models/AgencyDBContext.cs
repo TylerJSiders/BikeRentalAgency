@@ -19,6 +19,6 @@ namespace BikeRentalAgency.Models
         public DbSet<RentalShop> Shops { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<SpecialFeature> SpecialFeatures { get; set; }
-        //public DbSet<AdminLogin> Admins { get; set;}
+        public DbSet<AdminLogin> Admins { get; set;}
     }
 }

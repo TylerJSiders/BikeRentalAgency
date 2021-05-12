@@ -296,5 +296,43 @@ namespace BikeRentalAgency.Models.Repositories
         }
 
 
+
+        public async Task<List<AdminLogin>> GetAdmins()
+        {
+            return await context.Admins.ToListAsync();
+        }
+
+        public async Task<AdminLogin> GetAdminByID(int id)
+        {
+            return await context.Admins.FindAsync(id);
+        }
+
+        public bool AdminExists(int id)
+        {
+            return context.Admins.Any(s => s.ID == id);
+        }
+
+        public async Task<AdminLogin> DeleteAdmin(int id)
+        {
+            var AdminDelete = await GetAdminByID(id);
+            context.Admins.Remove(AdminDelete);
+            await context.SaveChangesAsync();
+            return AdminDelete;
+        }
+
+        public async Task<AdminLogin> UpdateAdmin(AdminLogin adminChanges)
+        {
+            var Admin = context.Admins.Attach(adminChanges);
+            Admin.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return await context.Admins.FindAsync(adminChanges.ID);
+        }
+        public async Task<AdminLogin> AddAdmin(AdminLogin adminLogin)
+        {
+            context.Admins.Add(adminLogin);
+            await context.SaveChangesAsync();
+            var admin = await context.Admins.OrderByDescending(s => s.ID).FirstOrDefaultAsync();
+            return admin;
+        }
     }
 }

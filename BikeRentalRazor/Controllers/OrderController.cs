@@ -32,8 +32,7 @@ namespace BikeRentalRazor.Controllers
             {
                 ModelState.AddModelError("", "Sorry, your cart is empty!");
             }
-
-            BLVM.Reservation.CustomerID = BLVM.Customer.ID;
+            
             BLVM.Reservation.ReservationDate = DateTime.Now.Date;
             BLVM.Reservation.BikeQuantity = cart.Lines.Count();
             BLVM.Reservation.TotalPrice = cart.ComputeTotalValue();
@@ -41,7 +40,8 @@ namespace BikeRentalRazor.Controllers
 
             if (ModelState.IsValid)
             {
-               // await repository.AddC
+                await repository.AddCustomer(BLVM.Customer);  //This is still returning zero for ID
+                BLVM.Reservation.CustomerID = BLVM.Customer.ID;
                 await repository.AddReservation(BLVM.Reservation);
                 cart.Clear();
                 return RedirectToPage("/Completed", new { ID = BLVM.Reservation.ID });

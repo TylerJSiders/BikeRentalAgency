@@ -43,5 +43,12 @@ namespace BikeRentalAgencyUI.Models.Interfaces
         public Task<bool> UpdateCustomer(Customer customerChanges);
         public Task<bool> DeleteCustomer(int id);
 
+        //Admin Methods
+        public Task<bool> AddAdmin(AdminLogin adminLogin);
+        public Task<List<AdminLogin>> GetAdmins();
+        public Task<AdminLogin> GetAdminByID(int id);
+        public Task<bool> DeleteAdmin(int id);
+        public Task<bool> UpdateAdmin(AdminLogin adminChanges);
+
     }
 }

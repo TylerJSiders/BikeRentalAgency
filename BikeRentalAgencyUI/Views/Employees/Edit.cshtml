@@ -18,7 +18,7 @@
                 <span asp-validation-for="employee.ID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="employee.ShopID" class="control-label">Shop ID</label>
+                <label asp-for="employee.ShopID" class="control-label">Assigned Shop</label>
                 <select class="dropdown" asp-for="employee.ShopID">
                     @foreach(var shop in Model.rentalShops)
                     {

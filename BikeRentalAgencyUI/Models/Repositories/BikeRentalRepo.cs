@@ -344,5 +344,75 @@ namespace BikeRentalAgencyUI.Models.Repositories
             }
             return succeeded;
         }
+
+        public async Task<bool> AddAdmin(AdminLogin adminLogin)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PostAsJsonAsync("api/Admins", adminLogin);
+                return res.IsSuccessStatusCode;
+            }
+        }
+
+        public async Task<List<AdminLogin>> GetAdmins()
+        {
+            List<AdminLogin> admins = new List<AdminLogin>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync("api/Admins");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    admins = JsonConvert.DeserializeObject<List<AdminLogin>>(response);
+                }
+                return admins;
+            }
+        }
+
+        public async Task<AdminLogin> GetAdminByID(int id)
+        {
+            AdminLogin admin = new AdminLogin();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await client.GetAsync($"api/Admins/GetAdminByID/{id}");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = res.Content.ReadAsStringAsync().Result;
+                    admin= JsonConvert.DeserializeObject<AdminLogin>(response);
+                }
+            }
+            return admin;
+        }
+
+        public async Task<bool> DeleteAdmin(int id)
+        {
+            bool succeeded = false;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.DeleteAsync($"api/Admins/DeleteAdmin/{id}");
+                succeeded = res.IsSuccessStatusCode;
+            }
+            return succeeded;
+        }
+
+        public async Task<bool> UpdateAdmin(AdminLogin adminChanges)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseURL);
+                HttpResponseMessage res = await client.PutAsJsonAsync($"api/Admins/UpdateAdmin/{adminChanges.ID}", adminChanges);
+                return res.IsSuccessStatusCode;
+            }
+        }
     }
 }
