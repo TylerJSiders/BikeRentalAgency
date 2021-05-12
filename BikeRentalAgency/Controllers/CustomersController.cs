@@ -73,9 +73,7 @@ namespace BikeRentalAgency.Controllers
                 return NoContent();
 
             var customerchanges = await Repository.UpdateCustomer(customer);
-
-            return customerchanges;
-            
+            return customerchanges;            
         }
 
         //// POST: api/Customers
@@ -86,8 +84,9 @@ namespace BikeRentalAgency.Controllers
             if (Repository.CustomerExistsByEmail(customer.Email))
                 return BadRequest($"User with email {customer.Email} already exists.");
             var customerAdded = await Repository.AddCustomer(customer);
+            return customerAdded;
 
-            return CreatedAtAction("GetCustomerByID", customerAdded, customer);
+            //return CreatedAtAction("GetCustomerByID", customerAdded, customer);
         }
 
         //// DELETE: api/Customers/5

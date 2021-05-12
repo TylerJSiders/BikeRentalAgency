@@ -4,14 +4,16 @@ using BikeRentalAgency.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BikeRentalAgency.Migrations
 {
     [DbContext(typeof(AgencyDBContext))]
-    partial class AgencyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210512122142_Admin")]
+    partial class Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

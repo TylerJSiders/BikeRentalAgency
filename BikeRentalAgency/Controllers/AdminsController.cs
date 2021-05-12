@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace BikeRentalAgency.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AdminsController : Controller
     {
         private IDBRepository Repository;
@@ -29,7 +31,7 @@ namespace BikeRentalAgency.Controllers
         }
 
         // GET: api/Admins/5
-        [HttpGet("GetAdmins/{id}")]
+        [HttpGet("GetAdminByID/{id}")]
         public async Task<ActionResult<AdminLogin>> GetAdminByID(int id)
         {
             if (!Repository.AdminExists(id))

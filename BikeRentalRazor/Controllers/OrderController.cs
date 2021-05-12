@@ -40,8 +40,11 @@ namespace BikeRentalRazor.Controllers
 
             if (ModelState.IsValid)
             {
-                await repository.AddCustomer(BLVM.Customer);  //This is still returning zero for ID
-                BLVM.Reservation.CustomerID = BLVM.Customer.ID;
+                await repository.AddCustomer(BLVM.Customer);
+                var customers = await repository.GetCustomers();
+                //var thiscustomer = customers.Where(c => c.Email == BLVM.Customer.Email);
+                var thiscustomer = customers.OrderByDescending(c => c.ID).FirstOrDefault();
+                BLVM.Reservation.CustomerID = thiscustomer.ID;
                 await repository.AddReservation(BLVM.Reservation);
                 cart.Clear();
                 return RedirectToPage("/Completed", new { ID = BLVM.Reservation.ID });
