@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>BikeRentals</title>
+    <title>Bike Rental</title>
     <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
@@ -20,9 +20,10 @@
     </div>
     <div class="row m-1 p-1">
         <div id="categories" class="col-3">
+            <h6>Our Shops: </h6>
             @foreach (var shop in Model.Shops)
             {
-                <a class="btn btn-block btn-outline-secondary" asp-controller="Home" asp-action="Index" asp-route-currentStoreID="@shop.ID">@shop.City, @shop.State</a>
+                <a class="btn btn-block btn-outline-secondary" asp-controller="Home" asp-action="Index" asp-route-currentStoreID="@shop.ID">@shop.AddressLine1, @shop.City, @shop.State</a>
             }
         </div>
         <div class="col-9">
